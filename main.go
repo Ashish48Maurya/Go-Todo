@@ -7,6 +7,7 @@ import (
 	"os"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/joho/godotenv"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -50,6 +51,13 @@ func main() {
 
 	//Create server code starts here  //similar to express.js
 	app := fiber.New()
+
+	app.Use(cors.New(cors.Config{
+		AllowOrigins:     "*",
+		AllowHeaders:     "Origin, Content-Type, Accept, Authorization",
+		AllowCredentials: true,
+	}))
+
 	app.Get("/api/todos/:id", getTodos)
 	app.Get("/api/todos", getTodos)
 	app.Post("/api/todos", createTodo)
