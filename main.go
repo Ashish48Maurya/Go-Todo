@@ -58,6 +58,7 @@ func main() {
 		AllowCredentials: true,
 	}))
 
+	app.Get('/', backendLive)
 	app.Get("/api/todos/:id", getTodos)
 	app.Get("/api/todos", getTodos)
 	app.Post("/api/todos", createTodo)
@@ -67,6 +68,10 @@ func main() {
 	port := os.Getenv("PORT")
 	log.Fatal(app.Listen("0.0.0.0:" + port))
 	//Create server code ends here
+}
+
+func backendLive(c *fiber.Ctx) error {
+	return c.Status(200).JSON(fiber.Map{"Status": "Backend is Live 🎉🎉🎉"})
 }
 
 func getTodos(c *fiber.Ctx) error {
