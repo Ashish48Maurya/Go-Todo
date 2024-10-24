@@ -58,7 +58,7 @@ func main() {
 		AllowCredentials: true,
 	}))
 
-	app.Get('/', backendLive)
+	app.Get("/", backendLive)
 	app.Get("/api/todos/:id", getTodos)
 	app.Get("/api/todos", getTodos)
 	app.Post("/api/todos", createTodo)
